@@ -1,6 +1,6 @@
 # cloudsim_frontend
 
-> A Vue.js project
+> Frontend of Tongji University's Undergraduate Graduation Design
 
 ## Build Setup
 
