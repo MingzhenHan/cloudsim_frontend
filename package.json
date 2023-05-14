@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@antv/g6": "^4.8.13",
     "element-ui": "^2.15.13",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
