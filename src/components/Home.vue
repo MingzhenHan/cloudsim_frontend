@@ -26,6 +26,42 @@
 <br>
 <el-button class="button" type="success" round @click="getGraph">Start Cloud Simulation</el-button>
 <div id="container"></div>
+<el-table
+    class="table"
+    :data="tableData"
+    height="600"
+    border
+    style="width: 80%">
+    <el-table-column
+      prop="jobid"
+      label="Job ID"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="status"
+      label="STATUS"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="vmid"
+      label="VM ID">
+    </el-table-column>
+    <el-table-column
+      prop="time"
+      label="Time"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="starttime"
+      label="Start Time"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="finishtime"
+      label="Finish Time"
+      width="180">
+    </el-table-column>
+  </el-table>
 </div>
 </template>
 
@@ -39,6 +75,7 @@ export default {
         fileList: [],
         filename:"",
         radio:1,
+        tableData:[],
         newdata:{}
       };
     },
@@ -71,6 +108,15 @@ export default {
         });
         console.log(this.newdata)
         this.initG6();
+
+        url='/getTable?name='+ this.filename +"&algorithm="+this.radio;
+        axios.get(url)
+          .then(response => {
+          this.tableData=response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
       },
       initG6(){
         G6.registerNode(
@@ -188,10 +234,10 @@ if (typeof window !== 'undefined')
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .upload-demo {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .button{
-  margin-top: 10px;
+  margin-top: 20px;
 }
 #container {
   position: relative;
@@ -203,5 +249,9 @@ if (typeof window !== 'undefined')
     background-color: #000;
     padding: 2px 8px;
     text-align: center;
+}
+.table {
+  margin-left: 135px;
+  margin-top: 25px;
 }
 </style>
