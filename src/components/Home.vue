@@ -15,12 +15,9 @@
 </el-upload>
 
 <el-radio-group v-model="radio">
-    <el-radio :label="1">MAXMIN</el-radio>
-    <el-radio :label="2">MINMIN</el-radio>
-    <el-radio :label="3">MCT</el-radio>
-    <el-radio :label="4">DATA</el-radio>
-    <el-radio :label="5">STATIC</el-radio>
     <el-radio :label="6">FCFS</el-radio>
+    <el-radio :label="2">MINMIN</el-radio>
+    <el-radio :label="1">MAXMIN</el-radio>
     <el-radio :label="7">ROUNDROBIN</el-radio>
 </el-radio-group>
 <br>
