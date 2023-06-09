@@ -2,6 +2,11 @@
 
 > Frontend of Tongji University's Undergraduate Graduation Design
 
+## Technology Stack
+Vue + Element UI + AntV G6
+
+https://g6.antv.antgroup.com/examples/net/dagreFlow#basicDagre
+
 ## Build Setup
 
 ``` bash
