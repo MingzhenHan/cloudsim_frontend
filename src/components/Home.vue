@@ -1,19 +1,48 @@
 <template>
 <div>
-<el-upload
-  class="upload-demo"
-  action="http://localhost:8080/uploadfile"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :before-remove="beforeRemove"
-  :on-success="saveName"
-  multiple
-  :limit="3"
-  :on-exceed="handleExceed"
-  :file-list="fileList">
-  <el-button size="small" type="primary">上传配置文件</el-button>
-</el-upload>
+<div class="buttonstyle">
+  <el-upload
+    class="upload-demo"
+    action="http://localhost:8082/uploadphysical"
+    :on-preview="handlePreview"
+    :on-remove="handleRemove"
+    :before-remove="beforeRemove"
+    :on-success="saveName"
+    multiple
+    :limit="3"
+    :on-exceed="handleExceed"
+    :file-list="fileList">
+    <el-button size="small" type="primary">上传物理拓扑文件</el-button>
+  </el-upload>
 
+  <el-upload
+    class="upload-demo"
+    action="http://localhost:8082/uploadvirtual"
+    :on-preview="handlePreview"
+    :on-remove="handleRemove"
+    :before-remove="beforeRemove"
+    :on-success="saveName"
+    multiple
+    :limit="3"
+    :on-exceed="handleExceed"
+    :file-list="fileList">
+    <el-button size="small" type="primary">上传虚拟拓扑文件</el-button>
+  </el-upload>
+
+  <el-upload
+    class="upload-demo"
+    action="http://localhost:8082/uploadworkload"
+    :on-preview="handlePreview"
+    :on-remove="handleRemove"
+    :before-remove="beforeRemove"
+    :on-success="saveName"
+    multiple
+    :limit="3"
+    :on-exceed="handleExceed"
+    :file-list="fileList">
+    <el-button size="small" type="primary">上传请求负载文件</el-button>
+  </el-upload>
+</div>
 <!-- <el-radio-group v-model="radio">
     <el-radio :label="6">FCFS</el-radio>
     <el-radio :label="2">MINMIN</el-radio>
@@ -77,7 +106,7 @@ export default {
       };
     },
     methods: {
-      handleRemove(file, fileList) { 
+      handleRemove(file, fileList) {
         console.log(file, fileList);
       },
       handlePreview(file) {
@@ -228,6 +257,14 @@ if (typeof window !== 'undefined')
 #container {
   position: relative;
 }
+
+.buttonstyle {
+  display: flex;
+  /* 改变item在主轴上的对齐方式 */
+  justify-content: center;
+  //justify-content: space-evenly;
+}
+
 .g6-tooltip {
     border-radius: 6px;
     font-size: 12px;
