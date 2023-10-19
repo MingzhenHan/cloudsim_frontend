@@ -11,17 +11,17 @@
   :limit="3"
   :on-exceed="handleExceed"
   :file-list="fileList">
-  <el-button size="small" type="primary">上传任务配置文件</el-button>
+  <el-button size="small" type="primary">上传配置文件</el-button>
 </el-upload>
 
-<el-radio-group v-model="radio">
+<!-- <el-radio-group v-model="radio">
     <el-radio :label="6">FCFS</el-radio>
     <el-radio :label="2">MINMIN</el-radio>
     <el-radio :label="1">MAXMIN</el-radio>
     <el-radio :label="7">ROUNDROBIN</el-radio>
-</el-radio-group>
+</el-radio-group> -->
 <br>
-<el-button class="button" type="success" round @click="getGraph">Start Cloud Simulation</el-button>
+<el-button class="button" type="success" round @click="run">Start Cloud Simulation</el-button>
 <div id="container"></div>
 <el-table
     class="table"
@@ -65,7 +65,7 @@
 <script>
 import G6 from '@antv/g6';
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = 'http://localhost:8082';
 export default {
     data() {
       return {
@@ -92,24 +92,13 @@ export default {
       saveName(response, file, fileList){
         this.filename=file.name;
       },
-      async getGraph(){
-        console.log(this.filename);
-        var url= '/getGraph?name='+ this.filename +"&algorithm="+this.radio;
+      async run(){
+        // console.log(this.filename);
+        var url= '/run';
         console.log(url);
         await axios.get(url)
           .then(response => {
-          this.newdata=response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-        console.log(this.newdata)
-        this.initG6();
-
-        url='/getTable?name='+ this.filename +"&algorithm="+this.radio;
-        axios.get(url)
-          .then(response => {
-          this.tableData=response.data;
+          this.tableData=response.data.data;
         })
         .catch(error => {
           console.log(error);
