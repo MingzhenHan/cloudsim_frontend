@@ -70,7 +70,11 @@
     </el-table-column>
     <el-table-column
       prop="vmid"
-      label="VM ID">
+      label="SRC ID">
+    </el-table-column>
+    <el-table-column
+      prop="destid"
+      label="DEST ID">
     </el-table-column>
     <el-table-column
       prop="time"
