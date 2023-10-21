@@ -12,6 +12,7 @@
   "dependencies": {
     "@antv/g6": "^4.8.13",
     "axios": "^1.4.0",
+    "element-angular": "^0.7.6",
     "element-ui": "^2.15.13",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"

@@ -1,5 +1,5 @@
 <template>
-<div style="background-color: #99a9bf">
+<div style="background-color:#99a9bf">
 
   <el-row>
     <el-col :span="24"><div class="grid-content bg-purple-dark">
@@ -7,11 +7,11 @@
     </div></el-col>
   </el-row>
   <el-row :gutter="20" background-color="#99a9bf">
-    <el-col :span="14"><div class="grid-content bg-purple-dark" style="margin-left: 60px;">
+    <el-col :span="16"><div class="grid-content bg-purple-dark">
       <el-table
         :data="tableData"
-        style="width: 100%; border: solid 3px black;border-radius: 20px;box-shadow: 15px 10px 5px black;"
-        height="550"
+        style="width: 100%;margin: 10px;"
+        height="500"
       >
         <el-table-column
           prop="jobid"
@@ -48,11 +48,8 @@
       </el-table>
     </div></el-col>
 
-    <el-col :span="1"><div class="grid-content">
-      <br>
-    </div></el-col>
 
-    <el-col :span="8"><div class="grid-content bg-purple-light"style="margin-right: 40px; border: solid 3px black;box-shadow: -10px 0px 5px black;">
+    <el-col :span="8"><div class="grid-content bg-purple-light"style="margin: 10px">
       <el-alert
         title="支持手动配置平台主机和交换机"
         type="success"
@@ -60,19 +57,19 @@
       </el-alert>
           <el-form :model="form" style="margin: 0px">
             <el-form-item label="主机数量" :label-width="formLabelWidth" >
-              <el-input size="small" v-model="form.hostnum" autocomplete="off"></el-input>
+              <el-input v-model="form.hostnum" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="边缘交换机端口数" :label-width="formLabelWidth" >
-              <el-input size="small" v-model="form.edgeports" autocomplete="off"></el-input>
+              <el-input v-model="form.edgeports" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="边缘交换机传输带宽" :label-width="formLabelWidth">
-              <el-input size="small" v-model="form.edgebw" autocomplete="off"></el-input>
+              <el-input v-model="form.edgebw" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="核心交换机端口数" :label-width="formLabelWidth">
-              <el-input size="small" v-model="form.coreports" autocomplete="off"></el-input>
+              <el-input v-model="form.coreports" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="核心交换机传输带宽" :label-width="formLabelWidth">
-              <el-input size="small" v-model="form.corebw" autocomplete="off"></el-input>
+              <el-input v-model="form.corebw" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button @click="resetphysical()">清空设置</el-button>
@@ -378,11 +375,6 @@ if (typeof window !== 'undefined')
 .el-form-item{
   margin-bottom: 0px;
   border: solid 1px #99a9bf;
-  min-height: 40px;
-}
-.el-input{
-  width: 100px;
-  margin: 0px;
 }
 .dialog-footer{
   margin-bottom: 10px;
