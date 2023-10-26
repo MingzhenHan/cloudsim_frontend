@@ -142,6 +142,7 @@
                 inactive-color="lightskyblue"
                 active-text="全双工"
                 inactive-text="半双工"
+                @change = "handleSwitch(halfduplex.valueOf())"
                 style="margin-right: 20px"
               >
               </el-switch>
@@ -240,14 +241,14 @@ export default {
         axios.post('/writephysical',  this.form.datacenters)
           .then(response => {
             console.log(response.data.message);
+            Message.success({
+              message: "设置成功",
+              duration: 1000
+            });
           })
           .catch(error => {
             console.log(error);
           });
-        Message.success({
-          message: "设置成功",
-          duration: 1000
-        });
         this.form.hostnum = 0;
         this.form.edgeports = 0;
         this.form.coreports = 0;
@@ -255,117 +256,18 @@ export default {
         this.form.corebw = 0;
         this.form.datacenters = [];
       },
-      initG6(){
-        G6.registerNode(
-  'sql',
-  {
-    drawShape(cfg, group) {
-      const rect = group.addShape('rect', {
-        attrs: {
-          x: -75,
-          y: -25,
-          width: 150,
-          height: 50,
-          radius: 10,
-          stroke: '#5B8FF9',
-          fill: '#C6E5FF',
-          lineWidth: 3,
-        },
-        name: 'rect-shape',
-      });
-      if (cfg.name) {
-        group.addShape('text', {
-          attrs: {
-            text: cfg.name,
-            x: 0,
-            y: 0,
-            fill: '#00287E',
-            fontSize: 14,
-            textAlign: 'center',
-            textBaseline: 'middle',
-            fontWeight: 'bold',
-          },
-          name: 'text-shape',
-        });
-      }
-      return rect;
-    },
-  },
-  'single-node',
-);
-
-const container = document.getElementById('container');
-const width = container.scrollWidth;
-const height = container.scrollHeight || 500;
-const graph = new G6.Graph({
-  container: 'container',
-  width,
-  height :675,
-  layout: {
-    type: 'dagre',
-    nodesepFunc: (d) => {
-      if (d.id === '3') {
-        return 500;
-      }
-      return 50;
-    },
-    ranksep: 70,
-    controlPoints: true,
-  },
-  defaultNode: {
-    type: 'sql',
-  },
-  defaultEdge: {
-    type: 'polyline',
-    style: {
-      radius: 20,
-      offset: 45,
-      endArrow: true,
-      lineWidth: 2,
-      stroke: '#C2C8D5',
-    },
-  },
-  nodeStateStyles: {
-    selected: {
-      stroke: '#d9d9d9',
-      fill: '#5394ef',
-    },
-  },
-  modes: {
-    default: [
-      'drag-canvas',
-      'zoom-canvas',
-      'click-select',
-      {
-        type: 'tooltip',
-        formatText(model) {
-          const cfg = model.conf;
-          const text = [];
-          cfg.forEach((row) => {
-            text.push(row.label + ':' + row.value + '<br>');
+      handleSwitch(switchstate){
+        console.log("handleSwitch!", switchstate);
+        axios.post('/halfduplex',  {switchstate})
+          .then(response => {
+            console.log(response.data.message);
+          })
+          .catch(error => {
+            console.log(error);
           });
-          return text.join('\n');
-        },
-        offset: 5
-      },
-    ],
-  },
-  fitView: true,
-});
-console.log("qing");
-console.log(this.newdata);
-graph.data(this.newdata);
-graph.render();
-
-if (typeof window !== 'undefined')
-  window.onresize = () => {
-    if (!graph || graph.get('destroyed')) return;
-    if (!container || !container.scrollWidth || !container.scrollHeight) return;
-    graph.changeSize(container.scrollWidth, container.scrollHeight);
-  };
       }
     }
-  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
